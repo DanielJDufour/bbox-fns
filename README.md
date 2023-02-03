@@ -24,3 +24,6 @@ const eastern_hemisphere = [0, -90, 180, 90];
 intersect(western_hemisphere, eastern_hemisphere);
 [0, -90, 0, 90] // prime meridian
 ```
+
+### projection support
+If you are looking for a library with projection support, try [geo-extent](https://github.com/danieljdufour/geo-extent)!
