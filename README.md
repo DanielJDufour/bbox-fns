@@ -3,6 +3,12 @@ Super Light-weight JavaScript Bounding Box Utility Functions
 
 ## usage
 
+### the bounding box
+Bounding boxes, or rectangular extents, are represented as an array of 4 numbers:
+```js
+[xmin, ymin, xmax, ymax]
+```
+
 ### booleanIntersects
 Checks if two bounding boxes have any intersection at all.
 ```js
