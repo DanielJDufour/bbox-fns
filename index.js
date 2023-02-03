@@ -1,8 +1,8 @@
 const booleanIntersects = require("./boolean-intersects.js");
-const intersection = require("./intersect.js");
+const intersect = require("./intersect.js");
 const polygon = require("./polygon.js");
 
-const bboxfns = { booleanIntersects, intersection, polygon };
+const bboxfns = { booleanIntersects, intersect, polygon };
 
 if (typeof define === "function" && define.amd) {
   define(function () {
