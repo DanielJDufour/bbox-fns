@@ -1,0 +1,25 @@
+{
+  "name": "bbox-fns",
+  "version": "0.0.0",
+  "description": "Light-weight JavaScript Bounding Box Utility Functions",
+  "main": "index.js",
+  "scripts": {
+    "format": "npx prettier --arrow-parens=avoid --trailing-comma=none --write *.js",
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielJDufour/bbox-fns.git"
+  },
+  "keywords": [
+    "bbox",
+    "geospatial",
+    "gis"
+  ],
+  "author": "Daniel J. Dufour",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/DanielJDufour/bbox-fns/issues"
+  },
+  "homepage": "https://github.com/DanielJDufour/bbox-fns#readme"
+}
