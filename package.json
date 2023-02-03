@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "description": "Light-weight JavaScript Bounding Box Utility Functions",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "boolean-intersects.js",
+    "intersect.js"
+  ],
   "scripts": {
     "format": "npx prettier --arrow-parens=avoid --trailing-comma=none --write *.js",
     "test": "node test.js"
