@@ -44,6 +44,8 @@ polygon([-180, -90, 180, 90]);
 ]
 ```
 
-
 ### projection support
 If you are looking for a library with projection support, try [geo-extent](https://github.com/danieljdufour/geo-extent)!
+
+### nomenclature
+This library borrows the names of some similar [Turf.js](https://turfjs.org/) functions, but it does not borrow the internal code.
