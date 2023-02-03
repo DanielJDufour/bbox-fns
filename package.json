@@ -6,7 +6,8 @@
   "files": [
     "index.js",
     "boolean-intersects.js",
-    "intersect.js"
+    "intersect.js",
+    "polygon.js"
   ],
   "scripts": {
     "format": "npx prettier --arrow-parens=avoid --trailing-comma=none --write *.js",
