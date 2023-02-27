@@ -9,6 +9,20 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 [xmin, ymin, xmax, ymax]
 ```
 
+### bboxArray
+Calculate the bounding box of an array of points (aka "a polygon ring")
+```js
+import bboxArray from "bbox-fns/bbox-array.js";
+
+bboxArray([
+  [ -180, 86.06126914660831 ],
+  [ -180, 85.66739606126914 ],
+  [ -179, 84.87964989059081 ],
+  [ -179, 84.48577680525165 ]
+]);
+[-180, 84.48577680525165, -179, 86.06126914660831]
+```
+
 ### booleanIntersects
 Checks if two bounding boxes have any intersection at all.
 ```js

@@ -5,12 +5,14 @@
   "main": "index.js",
   "files": [
     "index.js",
+    "bbox-array.js",
     "boolean-intersects.js",
     "dense-polygon.js",
     "intersect.js",
     "polygon.js"
   ],
   "scripts": {
+    "f": "npm run format",
     "format": "npx prettier --arrow-parens=avoid --trailing-comma=none --write *.js",
     "test": "node test.js"
   },

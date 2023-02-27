@@ -1,5 +1,8 @@
+"use_strict";
+
 const test = require("flug");
 
+const bboxArray = require("./bbox-array.js");
 const booleanIntersects = require("./boolean-intersects.js");
 const intersect = require("./intersect.js");
 const polygon = require("./polygon.js");
@@ -8,6 +11,16 @@ const densePolygon = require("./dense-polygon.js");
 const globe = [-180, -90, 180, 90];
 const western_hemisphere = [-180, -90, 0, 90];
 const eastern_hemisphere = [0, -90, 180, 90];
+
+test("bboxArray", ({ eq }) => {
+  const points = [
+    [-180, 86.06126914660831],
+    [-180, 85.66739606126914],
+    [-179, 84.87964989059081],
+    [-179, 84.48577680525165]
+  ];
+  eq(bboxArray(points), [-180, 84.48577680525165, -179, 86.06126914660831]);
+});
 
 test("booleanIntersects", ({ eq }) => {
   eq(booleanIntersects(western_hemisphere, eastern_hemisphere), true); // overlap on prime meridian
