@@ -50,6 +50,20 @@ polygon([-180, -90, 180, 90]);
 ]
 ```
 
+### densePolygon
+A more advanced version of polygon.  Create a polygon
+while adding points to each side of the rectangle.
+```js
+import polygon from "bbox-fns/dense-polygon.js";
+
+// add 100 points along each side
+densePolygon(bbox, { density: 100 });
+
+// add 100 points along the top and bottom edge (x-axis)
+// and 400 points along the left and right edge (y-axis)
+densePolygon(bbox, { density: [100, 400] });
+```
+
 ### projection support
 If you are looking for a library with projection support, try [geo-extent](https://github.com/danieljdufour/geo-extent)!
 

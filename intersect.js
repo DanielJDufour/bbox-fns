@@ -1,3 +1,5 @@
+"use_strict";
+
 const booleanIntersects = require("./boolean-intersects.js");
 
 function intersect(a, b) {
