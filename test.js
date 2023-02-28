@@ -27,7 +27,6 @@ test("booleanIntersects", ({ eq }) => {
   eq(booleanIntersects(western_hemisphere, eastern_hemisphere), true); // overlap on prime meridian
 });
 
-
 test("densePolygon", ({ eq }) => {
   eq(densePolygon(globe, { density: 1 }), [
     [
@@ -78,14 +77,13 @@ test("polygon", ({ eq }) => {
   ]);
 });
 
-
 test("reproject: sync", ({ eq }) => {
   const shiftLeft = ([x, y]) => [x - 360, y];
-  eq(reproject(globe, shiftLeft),  [-540,-90,-180,90]);
+  eq(reproject(globe, shiftLeft), [-540, -90, -180, 90]);
 });
 
 test("reproject: async", async ({ eq }) => {
   const shiftLeft = async ([x, y]) => [x - 360, y];
   const result = await reproject(globe, shiftLeft, { async: true });
-  eq(result,  [-540,-90,-180,90]);
+  eq(result, [-540, -90, -180, 90]);
 });

@@ -6,7 +6,13 @@ const polygon = require("./polygon.js");
 const densePolygon = require("./dense-polygon.js");
 const reproject = require("./reproject.js");
 
-const bboxfns = { booleanIntersects, densePolygon, intersect, polygon, reproject };
+const bboxfns = {
+  booleanIntersects,
+  densePolygon,
+  intersect,
+  polygon,
+  reproject
+};
 
 if (typeof define === "function" && define.amd) {
   define(function () {
