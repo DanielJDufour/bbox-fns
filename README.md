@@ -78,8 +78,25 @@ densePolygon(bbox, { density: 100 });
 densePolygon(bbox, { density: [100, 400] });
 ```
 
+### reproject
+Reproject a bounding box using the given reprojection function
+```js
+import reproject from "bbox-fns/reproject.js";
+import proj4 from "proj4-fully-loaded";
+
+// convert a bounding box from 4326 to a UTM projection
+const { forward } = proj4("EPSG:4326", "EPSG:32610");
+reproject(bbox, forward);
+
+// you can also pass in an async reprojection function
+reproject(bbox, forwardAsync, { async: true })
+
+// you can also control the point density of the intermediate polygon
+reproject(bbox, forward, { density: 99 })
+```
+
 ### projection support
-If you are looking for a library with projection support, try [geo-extent](https://github.com/danieljdufour/geo-extent)!
+If you are looking for a library with greater projection support and a class-based approach, try [geo-extent](https://github.com/danieljdufour/geo-extent)!
 
 ### nomenclature
 This library borrows the names of some similar [Turf.js](https://turfjs.org/) functions, but it does not borrow the internal code.
