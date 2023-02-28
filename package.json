@@ -9,7 +9,8 @@
     "boolean-intersects.js",
     "dense-polygon.js",
     "intersect.js",
-    "polygon.js"
+    "polygon.js",
+    "reproject.js"
   ],
   "scripts": {
     "f": "npm run format",
