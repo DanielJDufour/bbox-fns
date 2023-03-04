@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * @name bboxArray
  * @param {Array} points - an array (aka ring) of points
@@ -6,8 +8,10 @@
 function bboxArray(points) {
   const count = points.length;
   const [x, y] = points[0];
-  let xmin = (xmax = x);
-  let ymin = (ymax = y);
+  let xmin = x;
+  let xmax = x;
+  let ymin = y;
+  let ymax = y;
   for (let i = 1; i < count; i++) {
     const [x, y] = points[i];
     if (x < xmin) xmin = x;
