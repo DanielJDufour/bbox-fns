@@ -2,7 +2,11 @@
 
 const test = require("flug");
 
+const bboxArea = require("./bbox-area.js");
 const bboxArray = require("./bbox-array.js");
+const bboxPoint = require("./bbox-point.js");
+const bboxSize = require("./bbox-size.js");
+const booleanContainsPoint = require("./boolean-contains-point.js");
 const booleanIntersects = require("./boolean-intersects.js");
 const intersect = require("./intersect.js");
 const polygon = require("./polygon.js");
@@ -13,6 +17,20 @@ const globe = [-180, -90, 180, 90];
 const western_hemisphere = [-180, -90, 0, 90];
 const eastern_hemisphere = [0, -90, 180, 90];
 
+test("bboxPoint", ({ eq }) => {
+  const point = [-180, 86.06126914660831];
+  eq(bboxPoint(point), [-180, 86.06126914660831, -180, 86.06126914660831]);
+});
+
+test("bboxArea", ({ eq }) => {
+  eq(bboxArea([2, 3, 8, 9]), 36);
+  eq(
+    bboxArea([-180, 84.48577680525165, -179, 86.06126914660831]),
+    1.5754923413566644
+  );
+  eq(bboxArea([-540, -90, -180, 90]), 64800);
+});
+
 test("bboxArray", ({ eq }) => {
   const points = [
     [-180, 86.06126914660831],
@@ -21,6 +39,26 @@ test("bboxArray", ({ eq }) => {
     [-179, 84.48577680525165]
   ];
   eq(bboxArray(points), [-180, 84.48577680525165, -179, 86.06126914660831]);
+});
+
+test("bboxSize", ({ eq }) => {
+  eq(bboxSize([-180, 84.48577680525165, -179, 86.06126914660831]), [
+    1,
+    1.5754923413566644
+  ]);
+  eq(bboxSize([-540, -90, -180, 90]), [360, 180]);
+});
+
+test("booleanContainsPoint", ({ eq }) => {
+  const western_hemisphere = [-180, -90, 0, 90];
+  const hawaii = [-155.844437, 19.741755];
+  const null_island = [0, 0];
+  eq(booleanContainsPoint(western_hemisphere, hawaii), true);
+  eq(booleanContainsPoint(western_hemisphere, null_island), true);
+  eq(
+    booleanContainsPoint(western_hemisphere, null_island, { exclusive: true }),
+    false
+  );
 });
 
 test("booleanIntersects", ({ eq }) => {

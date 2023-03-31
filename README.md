@@ -1,12 +1,30 @@
 # bbox-fns: work in progress
 Super Light-weight JavaScript Bounding Box Utility Functions
 
-## usage
-
 ### the bounding box
 Bounding boxes, or rectangular extents, are represented as an array of 4 numbers:
 ```js
 [xmin, ymin, xmax, ymax]
+```
+
+## functions
+- [bboxArea](#bboxArea)
+- [bboxArray](#bboxArray)
+- [bboxPoint](#bboxPoint)
+- [booleanContainsPoint](#booleanContainsPoint)
+- [booleanIntersects](#booleanIntersects)
+- [densePolygon](#densePolygon)
+- [intersect](#intersect)
+- [polygon](#polygon)
+- [reproject](#reproject)
+
+### bboxArea
+Calculate the area of a bounding box
+```js
+import bboxArea from "bbox-fns/bbox-area.js";
+
+bboxArea([2, 3, 8, 9])
+36 // (8 - 2) * (9 - 3)
 ```
 
 ### bboxArray
@@ -21,6 +39,45 @@ bboxArray([
   [ -179, 84.48577680525165 ]
 ]);
 [-180, 84.48577680525165, -179, 86.06126914660831]
+```
+
+### bboxPoint
+Convert a single [x, y] point into a bounding box of zero width and height;
+```js
+import bboxPoint from "bbox-fns/bbox-point.js";
+
+bboxPoint([-180, 86.06126914660831]);
+[-180, 86.06126914660831, -180, 86.06126914660831]
+```
+
+### bboxSize
+Calculate the width and height of a bounding box
+```js
+import bboxSize from "bbox-fns/bbox-size.js";
+
+bboxSize([-180, 84.48577680525165, -179, 86.06126914660831]);
+[1, 1.5754923413566644]
+```
+
+### booleanContainsPoint
+Check if a bounding box contains a point
+```js
+import booleanContainsPoint from "bbox-fns/boolean-contains-point.js";
+
+const western_hemisphere = [-180, -90, 0, 90];
+const eastern_hemisphere = [0, -90, 180, 90];
+const hawaii = [-155.844437, 19.741755];
+
+booleanContainsPoint(western_hemisphere, hawaii);
+true
+
+// point on boundary
+booleanContainsPoint(western_hemisphere, [0, 0]);
+true
+
+// ignoring points on the exact edge
+booleanContainsPoint(western_hemisphere, [0, 0], { exclusive: true });
+false
 ```
 
 ### booleanIntersects
