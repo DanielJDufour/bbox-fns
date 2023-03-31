@@ -5,7 +5,11 @@
   "main": "index.js",
   "files": [
     "index.js",
+    "bbox-area.js",
     "bbox-array.js",
+    "bbox-point.js",
+    "bbox-size.js",
+    "boolean-contains-point.js",
     "boolean-intersects.js",
     "dense-polygon.js",
     "intersect.js",
