@@ -12,6 +12,7 @@ const intersect = require("./intersect.js");
 const merge = require("./merge.js");
 const polygon = require("./polygon.js");
 const densePolygon = require("./dense-polygon.js");
+const preciseDensePolygon = require("./precise/dense-polygon.js");
 const reproject = require("./reproject.js");
 
 const globe = [-180, -90, 180, 90];
@@ -95,6 +96,37 @@ test("densePolygon", ({ eq }) => {
 
   const result = densePolygon(globe, { density: [123, 456] });
   eq(result[0].length, 5 + 2 * 123 + 2 * 456);
+});
+
+test("preciseDensePolygon", ({ eq }) => {
+  eq(preciseDensePolygon(globe, { density: 1 }), [
+    [
+      ["-180", "90"],
+      ["-180", "0"],
+      ["-180", "-90"],
+      ["0", "-90"],
+      ["180", "-90"],
+      ["180", "0"],
+      ["180", "90"],
+      ["0", "90"],
+      ["-180", "90"]
+    ]
+  ]);
+
+  eq(preciseDensePolygon(globe, { density: [1, 0] }), [
+    [
+      ["-180", "90"],
+      ["-180", "-90"],
+      ["0", "-90"],
+      ["180", "-90"],
+      ["180", "90"],
+      ["0", "90"],
+      ["-180", "90"]
+    ]
+  ]);
+
+  const result = preciseDensePolygon(globe, { density: [359, 179] });
+  eq(result[0].length, 5 + 2 * 359 + 2 * 179);
 });
 
 test("intersect", ({ eq }) => {

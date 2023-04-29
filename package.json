@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "f": "npm run format",
-    "format": "npx prettier --arrow-parens=avoid --trailing-comma=none --write *.js",
+    "format": "npx prettier --arrow-parens=avoid --trailing-comma=none --write *.js */*.js",
     "test": "node test.js"
   },
   "repository": {

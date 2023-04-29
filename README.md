@@ -169,3 +169,16 @@ If you are looking for a library with greater projection support and a class-bas
 
 ### nomenclature
 This library borrows the names of some similar [Turf.js](https://turfjs.org/) functions, but it does not borrow the internal code.
+
+### advanced usage
+#### precise functions
+In order to avoid floating point arithmetic errors, you can use the precise version of these functions where numbers are represented as strings.
+```js
+import preciseDensePolygon from "bbox-fns/precise/dense-polygon.js";
+
+preciseDensePolygon(bbox, { density: 100 }); // add 100 points to each side
+preciseDensePolygon(bbox, { density: [359, 179] }); // add 359 points to top and bottom, and 179 points to the left and right
+[
+  [ '-180', '80' ],  [ '-180', '79' ],  [ '-180', '78' ],  [ '-180', '77' ], /* ... */, [ '-180', '80' ]
+]
+```
