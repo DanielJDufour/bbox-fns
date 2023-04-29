@@ -14,7 +14,10 @@
     "dense-polygon.js",
     "intersect.js",
     "polygon.js",
-    "reproject.js"
+    "reproject.js",
+    "precise/bbox-array.js",
+    "precise/dense-polygon.js",
+    "precise/reproject.js"
   ],
   "scripts": {
     "f": "npm run format",
