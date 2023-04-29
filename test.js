@@ -9,6 +9,7 @@ const bboxSize = require("./bbox-size.js");
 const booleanContainsPoint = require("./boolean-contains-point.js");
 const booleanIntersects = require("./boolean-intersects.js");
 const intersect = require("./intersect.js");
+const merge = require("./merge.js");
 const polygon = require("./polygon.js");
 const densePolygon = require("./dense-polygon.js");
 const reproject = require("./reproject.js");
@@ -101,6 +102,11 @@ test("intersect", ({ eq }) => {
   eq(intersect(western_hemisphere, eastern_hemisphere), [0, -90, 0, 90]);
 
   eq(intersect([-180, 1, -1, 90], [1, 1, 180, 90]), null);
+});
+
+test("merge", ({ eq }) => {
+  const bboxes = [western_hemisphere, eastern_hemisphere];
+  eq(merge(bboxes), [-180, -90, 180, 90]);
 });
 
 test("polygon", ({ eq }) => {

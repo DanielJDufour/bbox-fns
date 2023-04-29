@@ -15,6 +15,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [booleanIntersects](#booleanIntersects)
 - [densePolygon](#densePolygon)
 - [intersect](#intersect)
+- [merge](#merge)
 - [polygon](#polygon)
 - [reproject](#reproject)
 
@@ -100,6 +101,17 @@ const eastern_hemisphere = [0, -90, 180, 90];
 
 intersect(western_hemisphere, eastern_hemisphere);
 [0, -90, 0, 90] // prime meridian
+```
+
+### merge
+```js
+import merge from "bbox-fns/merge.js";
+
+const western_hemisphere = [-180, -90, 0, 90];
+const eastern_hemisphere = [0, -90, 180, 90];
+const bboxes = [western_hemisphere, eastern_hemisphere];
+merge(bboxes);
+[-180, -90, 180, 90] // bbox for the whole globe
 ```
 
 ### polygon
