@@ -1,6 +1,7 @@
 "use_strict";
 
 const test = require("flug");
+const subtract = require("preciso/subtract.js");
 
 const bboxArea = require("./bbox-area.js");
 const bboxArray = require("./bbox-array.js");
@@ -14,6 +15,7 @@ const polygon = require("./polygon.js");
 const densePolygon = require("./dense-polygon.js");
 const preciseDensePolygon = require("./precise/dense-polygon.js");
 const reproject = require("./reproject.js");
+const preciseReproject = require("./precise/reproject.js");
 
 const globe = [-180, -90, 180, 90];
 const western_hemisphere = [-180, -90, 0, 90];
@@ -162,4 +164,15 @@ test("reproject: async", async ({ eq }) => {
   const shiftLeft = async ([x, y]) => [x - 360, y];
   const result = await reproject(globe, shiftLeft, { async: true });
   eq(result, [-540, -90, -180, 90]);
+});
+
+test("reproject: sync + precise", ({ eq }) => {
+  const shiftLeft = ([x, y]) => [subtract(x, "360"), y];
+  eq(preciseReproject(globe, shiftLeft), ["-540", "-90", "-180", "90"]);
+});
+
+test("reproject: async + precise", async ({ eq }) => {
+  const shiftLeft = async ([x, y]) => [subtract(x, "360"), y];
+  const result = await preciseReproject(globe, shiftLeft, { async: true });
+  eq(result, ["-540", "-90", "-180", "90"]);
 });

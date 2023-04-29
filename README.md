@@ -174,11 +174,13 @@ This library borrows the names of some similar [Turf.js](https://turfjs.org/) fu
 #### precise functions
 In order to avoid floating point arithmetic errors, you can use the precise version of these functions where numbers are represented as strings.
 ```js
+import preciseBboxArray from "bbox-fns/precise/bbox-array.js";
 import preciseDensePolygon from "bbox-fns/precise/dense-polygon.js";
+import preciseReproject from "bbox-fns/precise/reproject.js";
 
-preciseDensePolygon(bbox, { density: 100 }); // add 100 points to each side
 preciseDensePolygon(bbox, { density: [359, 179] }); // add 359 points to top and bottom, and 179 points to the left and right
 [
   [ '-180', '80' ],  [ '-180', '79' ],  [ '-180', '78' ],  [ '-180', '77' ], /* ... */, [ '-180', '80' ]
 ]
+
 ```
