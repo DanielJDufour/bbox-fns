@@ -192,6 +192,7 @@ In order to avoid floating point arithmetic errors, you can use the precise vers
 ```js
 import preciseBboxArray from "bbox-fns/precise/bbox-array.js";
 import preciseDensePolygon from "bbox-fns/precise/dense-polygon.js";
+import preciseDivide from "bbox-fns/precise/divide.js";
 import preciseReproject from "bbox-fns/precise/reproject.js";
 
 preciseDensePolygon(bbox, { density: [359, 179] }); // add 359 points to top and bottom, and 179 points to the left and right
@@ -199,4 +200,6 @@ preciseDensePolygon(bbox, { density: [359, 179] }); // add 359 points to top and
   [ '-180', '80' ],  [ '-180', '79' ],  [ '-180', '78' ],  [ '-180', '77' ], /* ... */, [ '-180', '80' ]
 ]
 
+preciseDivide([0, 9, 50, 200], [3, 4], { ellipsis: true })
+["0", "2.25", "16.666...", "50"]
 ```

@@ -17,6 +17,7 @@ const preciseDensePolygon = require("./precise/dense-polygon.js");
 const reproject = require("./reproject.js");
 const preciseReproject = require("./precise/reproject.js");
 const scale = require("./scale.js");
+const preciseDivide = require("./precise/divide.js");
 
 const globe = [-180, -90, 180, 90];
 const western_hemisphere = [-180, -90, 0, 90];
@@ -182,4 +183,15 @@ test("scale", async ({ eq }) => {
   eq(scale([0, 9, 50, 200], 0.5), [0, 4.5, 25, 100]);
   eq(scale([0, 9, 50, 200], [0.5]), [0, 4.5, 25, 100]);
   eq(scale([0, 9, 50, 200], [2, 10]), [0, 90, 100, 2000]);
+});
+
+test("preciseDivide", ({ eq }) => {
+  eq(preciseDivide([0, 9, 50, 200], 2), ["0", "4.5", "25", "100"]);
+  eq(preciseDivide([0, 9, 50, 200], [2]), ["0", "4.5", "25", "100"]);
+  eq(preciseDivide([0, 9, 50, 200], [3, 4], { ellipsis: true }), [
+    "0",
+    "2.25",
+    "16.666...",
+    "50"
+  ]);
 });
