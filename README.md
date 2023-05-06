@@ -17,6 +17,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [intersect](#intersect)
 - [merge](#merge)
 - [polygon](#polygon)
+- [scale](#scale)
 - [reproject](#reproject)
 
 ### bboxArea
@@ -145,6 +146,21 @@ densePolygon(bbox, { density: 100 });
 // add 100 points along the top and bottom edge (x-axis)
 // and 400 points along the left and right edge (y-axis)
 densePolygon(bbox, { density: [100, 400] });
+```
+
+### scale
+Multiply x and y values by the given scale values
+```js
+import scale from "bbox-fns/scale.js";
+
+// shrink the grid by 50%
+scale([0, 9, 50, 200], 0.5);
+[0, 4.5, 25, 100];
+
+// scale x and y values by different factors
+// same as [0 * 2, 9 * 10, 50 * 2, 200 * 10]
+scale([0, 9, 50, 200], [2, 10]);
+[0, 90, 100, 2000]
 ```
 
 ### reproject
