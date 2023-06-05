@@ -9,6 +9,7 @@ const bboxPoint = require("./bbox-point.js");
 const bboxSize = require("./bbox-size.js");
 const booleanContainsPoint = require("./boolean-contains-point.js");
 const booleanIntersects = require("./boolean-intersects.js");
+const calc = require("./calc.js");
 const intersect = require("./intersect.js");
 const merge = require("./merge.js");
 const polygon = require("./polygon.js");
@@ -69,6 +70,336 @@ test("booleanContainsPoint", ({ eq }) => {
 
 test("booleanIntersects", ({ eq }) => {
   eq(booleanIntersects(western_hemisphere, eastern_hemisphere), true); // overlap on prime meridian
+});
+
+test("calc: GeoJSON Point", ({ eq }) => {
+  eq(
+    calc({
+      type: "Point",
+      coordinates: [30, 10]
+    }),
+    [30, 10, 30, 10]
+  );
+});
+
+test("calc: GeoJSON LineString", ({ eq }) => {
+  eq(
+    calc({
+      type: "LineString",
+      coordinates: [
+        [30, 10],
+        [10, 30],
+        [40, 40]
+      ]
+    }),
+    [10, 10, 40, 40]
+  );
+});
+
+test("calc: GeoJSON Polygon", ({ eq }) => {
+  const geojson = {
+    type: "Polygon",
+    coordinates: [
+      [
+        [30, 10],
+        [40, 40],
+        [20, 40],
+        [10, 20],
+        [30, 10]
+      ]
+    ]
+  };
+  eq(calc(geojson), [10, 10, 40, 40]);
+  eq(calc(geojson.coordinates), [10, 10, 40, 40]);
+});
+
+test("calc: GeoJSON Polygon with hole", ({ eq }) => {
+  eq(
+    calc({
+      type: "Polygon",
+      coordinates: [
+        [
+          [35, 10],
+          [45, 45],
+          [15, 40],
+          [10, 20],
+          [35, 10]
+        ],
+        [
+          [20, 30],
+          [35, 35],
+          [30, 20],
+          [20, 30]
+        ]
+      ]
+    }),
+    [10, 10, 45, 45]
+  );
+});
+
+test("calc: GeoJSON MultiPoint", ({ eq }) => {
+  eq(
+    calc({
+      type: "MultiPoint",
+      coordinates: [
+        [10, 40],
+        [40, 30],
+        [20, 20],
+        [30, 10]
+      ]
+    }),
+    [10, 10, 40, 40]
+  );
+});
+
+test("calc: GeoJSON MultiLineString", ({ eq }) => {
+  eq(
+    calc({
+      type: "MultiLineString",
+      coordinates: [
+        [
+          [10, 10],
+          [20, 20],
+          [10, 40]
+        ],
+        [
+          [40, 40],
+          [30, 30],
+          [40, 20],
+          [30, 10]
+        ]
+      ]
+    }),
+    [10, 10, 40, 40]
+  );
+});
+
+test("calc: GeoJSON MultiPolygon", ({ eq }) => {
+  const geojson = {
+    type: "MultiPolygon",
+    coordinates: [
+      [
+        [
+          [30, 20],
+          [45, 40],
+          [10, 40],
+          [30, 20]
+        ]
+      ],
+      [
+        [
+          [15, 5],
+          [40, 10],
+          [10, 20],
+          [5, 10],
+          [15, 5]
+        ]
+      ]
+    ]
+  };
+  eq(calc(geojson), [5, 5, 45, 40]);
+  eq(calc(geojson.coordinates), [5, 5, 45, 40]);
+});
+
+test("calc: GeoJSON MultiPolygon with hole", ({ eq }) => {
+  eq(
+    calc({
+      type: "MultiPolygon",
+      coordinates: [
+        [
+          [
+            [40, 40],
+            [20, 45],
+            [45, 30],
+            [40, 40]
+          ]
+        ],
+        [
+          [
+            [20, 35],
+            [10, 30],
+            [10, 10],
+            [30, 5],
+            [45, 20],
+            [20, 35]
+          ],
+          [
+            [30, 20],
+            [20, 15],
+            [20, 25],
+            [30, 20]
+          ]
+        ]
+      ]
+    }),
+    [10, 5, 45, 45]
+  );
+});
+
+test("calc: GeoJSON GeometryCollection", ({ eq }) => {
+  eq(
+    calc({
+      type: "GeometryCollection",
+      geometries: [
+        {
+          type: "Point",
+          coordinates: [40, 10]
+        },
+        {
+          type: "LineString",
+          coordinates: [
+            [10, 10],
+            [20, 20],
+            [10, 40]
+          ]
+        },
+        {
+          type: "Polygon",
+          coordinates: [
+            [
+              [40, 40],
+              [20, 45],
+              [45, 30],
+              [40, 40]
+            ]
+          ]
+        }
+      ]
+    }),
+    [10, 10, 45, 45]
+  );
+});
+
+test("calc: ArcGIS Point in 2D", ({ eq }) => {
+  eq(
+    calc({
+      x: -118.15,
+      y: 33.8,
+      spatialReference: {
+        wkid: 4326
+      }
+    }),
+    [-118.15, 33.8, -118.15, 33.8]
+  );
+});
+
+test("calc: ArcGIS Point in 3D", ({ eq }) => {
+  eq(
+    calc({
+      x: -118.15,
+      y: 33.8,
+      z: 10.0,
+      spatialReference: {
+        wkid: 4326
+      }
+    }),
+    [-118.15, 33.8, -118.15, 33.8]
+  );
+});
+
+test("calc: ArcGIS MultiPoint", ({ eq }) => {
+  eq(
+    calc({
+      points: [
+        [-97.06138, 32.837],
+        [-97.06133, 32.836],
+        [-97.06124, 32.834],
+        [-97.06127, 32.832]
+      ],
+      spatialReference: {
+        wkid: 4326
+      }
+    }),
+    [-97.06138, 32.832, -97.06124, 32.837]
+  );
+});
+
+test("calc: ArcGIS Polyline", ({ eq }) => {
+  eq(
+    calc({
+      paths: [
+        [
+          [-97.06138, 32.837],
+          [-97.06133, 32.836],
+          [-97.06124, 32.834],
+          [-97.06127, 32.832]
+        ],
+        [
+          [-97.06326, 32.759],
+          [-97.06298, 32.755]
+        ]
+      ],
+      spatialReference: { wkid: 4326 }
+    }),
+    [-97.06326, 32.755, -97.06124, 32.837]
+  );
+});
+
+test("calc: ArcGIS Polygon in 2D", ({ eq }) => {
+  eq(
+    calc({
+      rings: [
+        [
+          [-97.06138, 32.837],
+          [-97.06133, 32.836],
+          [-97.06124, 32.834],
+          [-97.06127, 32.832],
+          [-97.06138, 32.837]
+        ],
+        [
+          [-97.06326, 32.759],
+          [-97.06298, 32.755],
+          [-97.06153, 32.749],
+          [-97.06326, 32.759]
+        ]
+      ],
+      spatialReference: {
+        wkid: 4326
+      }
+    }),
+    [-97.06326, 32.749, -97.06124, 32.837]
+  );
+});
+
+test("calc: ArcGIS Polygon in 3D", ({ eq }) => {
+  eq(
+    calc({
+      hasZ: true,
+      hasM: true,
+      rings: [
+        [
+          [-97.06138, 32.837, 35.1, 4],
+          [-97.06133, 32.836, 35.2, 4.1],
+          [-97.06124, 32.834, 35.3, 4.2],
+          [-97.06127, 32.832, 35.2, 44.3],
+          [-97.06138, 32.837, 35.1, 4]
+        ],
+        [
+          [-97.06326, 32.759, 35.4],
+          [-97.06298, 32.755, 35.5],
+          [-97.06153, 32.749, 35.6],
+          [-97.06326, 32.759, 35.4]
+        ]
+      ],
+      spatialReference: { wkid: 4326 }
+    }),
+    [-97.06326, 32.749, -97.06124, 32.837]
+  );
+});
+
+test("calc: ArcGIS Envelope in 2D", ({ eq }) => {
+  eq(
+    calc({
+      xmin: -109.55,
+      ymin: 25.76,
+      xmax: -86.39,
+      ymax: 49.94,
+      spatialReference: {
+        wkid: 4326
+      }
+    }),
+    [-109.55, 25.76, -86.39, 49.94]
+  );
 });
 
 test("densePolygon", ({ eq }) => {

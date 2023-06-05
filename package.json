@@ -11,6 +11,7 @@
     "bbox-size.js",
     "boolean-contains-point.js",
     "boolean-intersects.js",
+    "calc.js",
     "dense-polygon.js",
     "intersect.js",
     "polygon.js",

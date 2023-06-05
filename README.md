@@ -13,6 +13,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [bboxPoint](#bboxPoint)
 - [booleanContainsPoint](#booleanContainsPoint)
 - [booleanIntersects](#booleanIntersects)
+- [calc](#calc)
 - [densePolygon](#densePolygon)
 - [intersect](#intersect)
 - [merge](#merge)
@@ -132,6 +133,26 @@ polygon([-180, -90, 180, 90]);
     [-180, 90]   // top-left
   ]
 ]
+```
+
+### calc
+Calculate the bounding box of a geometry in either GeoJSON or ArcGIS JSON.
+```js
+import calc from "bbox-fns/calc.js";
+
+calc({
+  type: "Polygon",
+  coordinates: [
+    [
+      [30, 10],
+      [40, 40],
+      [20, 40],
+      [10, 20],
+      [30, 10]
+    ]
+  ]
+});
+[10, 10, 40, 40]
 ```
 
 ### densePolygon

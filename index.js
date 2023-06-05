@@ -1,6 +1,7 @@
 "use_strict";
 
 const booleanIntersects = require("./boolean-intersects.js");
+const calc = require("./calc.js");
 const intersect = require("./intersect.js");
 const polygon = require("./polygon.js");
 const densePolygon = require("./dense-polygon.js");
@@ -9,6 +10,7 @@ const scale = require("./scale.js");
 
 const bboxfns = {
   booleanIntersects,
+  calc,
   densePolygon,
   intersect,
   polygon,
