@@ -1,6 +1,6 @@
 {
   "name": "bbox-fns",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Light-weight JavaScript Bounding Box Utility Functions",
   "main": "index.js",
   "files": [
