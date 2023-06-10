@@ -1,5 +1,7 @@
 "use_strict";
 
+const booleanContains = require("./boolean-contains.js");
+const booleanContainsPoint = require("./boolean-contains-point.js");
 const booleanIntersects = require("./boolean-intersects.js");
 const calc = require("./calc.js");
 const intersect = require("./intersect.js");
@@ -9,6 +11,8 @@ const reproject = require("./reproject.js");
 const scale = require("./scale.js");
 
 const bboxfns = {
+  booleanContains,
+  booleanContainsPoint,
   booleanIntersects,
   calc,
   densePolygon,
