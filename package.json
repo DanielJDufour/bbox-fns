@@ -9,6 +9,7 @@
     "bbox-array.js",
     "bbox-point.js",
     "bbox-size.js",
+    "boolean-contains.js",
     "boolean-contains-point.js",
     "boolean-intersects.js",
     "calc.js",

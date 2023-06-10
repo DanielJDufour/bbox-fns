@@ -11,6 +11,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [bboxArea](#bboxArea)
 - [bboxArray](#bboxArray)
 - [bboxPoint](#bboxPoint)
+- [booleanContains](#booleanContains)
 - [booleanContainsPoint](#booleanContainsPoint)
 - [booleanIntersects](#booleanIntersects)
 - [calc](#calc)
@@ -60,6 +61,22 @@ import bboxSize from "bbox-fns/bbox-size.js";
 
 bboxSize([-180, 84.48577680525165, -179, 86.06126914660831]);
 [1, 1.5754923413566644]
+```
+
+### booleanContains
+Check if a bounding box contains another
+```js
+import booleanContains from "bbox-fns/boolean-contains.js";
+
+const western_hemisphere = [-180, -90, 0, 90];
+const colorado = [-109.05378, 37.0057, -102.0665, 41.0443];
+
+booleanContains(western_hemisphere, colorado);
+true
+
+// exclude bbox that extends to the exact edge
+booleanContains(western_hemisphere, [-10, -20, 0, 20], { exclusive: true });
+false
 ```
 
 ### booleanContainsPoint

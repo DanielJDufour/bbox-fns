@@ -7,6 +7,7 @@ const bboxArea = require("./bbox-area.js");
 const bboxArray = require("./bbox-array.js");
 const bboxPoint = require("./bbox-point.js");
 const bboxSize = require("./bbox-size.js");
+const booleanContains = require("./boolean-contains.js");
 const booleanContainsPoint = require("./boolean-contains-point.js");
 const booleanIntersects = require("./boolean-intersects.js");
 const calc = require("./calc.js");
@@ -54,6 +55,24 @@ test("bboxSize", ({ eq }) => {
     1.5754923413566644
   ]);
   eq(bboxSize([-540, -90, -180, 90]), [360, 180]);
+});
+
+test("booleanContains", ({ eq }) => {
+  const western_hemisphere = [-180, -90, 0, 90];
+  const eastern_hemisphere = [0, -90, 180, 90];
+  const northern_hemisphere = [-180, 0, 180, 90];
+  const colorado = [-109.05378, 37.0057, -102.0665, 41.0443];
+  const bbox_to_edge = [-10, -20, 0, 20];
+  eq(booleanContains(western_hemisphere, colorado), true);
+  eq(booleanContains(colorado, western_hemisphere), false);
+  eq(booleanContains(eastern_hemisphere, colorado), false);
+  eq(booleanContains(eastern_hemisphere, western_hemisphere), false);
+  eq(booleanContains(western_hemisphere, bbox_to_edge), true);
+  eq(
+    booleanContains(western_hemisphere, bbox_to_edge, { exclusive: true }),
+    false
+  );
+  eq(booleanContains(western_hemisphere, northern_hemisphere), false);
 });
 
 test("booleanContainsPoint", ({ eq }) => {
