@@ -3,23 +3,25 @@
 const test = require("flug");
 const subtract = require("preciso/subtract.js");
 
-const bboxArea = require("./bbox-area.js");
-const bboxArray = require("./bbox-array.js");
-const bboxPoint = require("./bbox-point.js");
-const bboxSize = require("./bbox-size.js");
-const booleanContains = require("./boolean-contains.js");
-const booleanContainsPoint = require("./boolean-contains-point.js");
-const booleanIntersects = require("./boolean-intersects.js");
-const calc = require("./calc.js");
-const intersect = require("./intersect.js");
-const merge = require("./merge.js");
-const polygon = require("./polygon.js");
-const densePolygon = require("./dense-polygon.js");
-const preciseDensePolygon = require("./precise/dense-polygon.js");
-const reproject = require("./reproject.js");
-const preciseReproject = require("./precise/reproject.js");
-const scale = require("./scale.js");
-const preciseDivide = require("./precise/divide.js");
+const {
+  bboxArea,
+  bboxArray,
+  bboxPoint,
+  bboxSize,
+  booleanContains,
+  booleanContainsPoint,
+  booleanIntersects,
+  calc,
+  densePolygon,
+  intersect,
+  merge,
+  polygon,
+  preciseDensePolygon,
+  reproject,
+  preciseReproject,
+  scale,
+  preciseDivide
+} = require("./index.js");
 
 const globe = [-180, -90, 180, 90];
 const western_hemisphere = [-180, -90, 0, 90];
