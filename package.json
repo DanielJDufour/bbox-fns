@@ -15,6 +15,7 @@
     "calc.js",
     "dense-polygon.js",
     "intersect.js",
+    "merge.js",
     "polygon.js",
     "reproject.js",
     "scale.js",
