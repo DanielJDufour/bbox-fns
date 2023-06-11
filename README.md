@@ -21,6 +21,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [polygon](#polygon)
 - [scale](#scale)
 - [reproject](#reproject)
+- [validate](#validate)
 
 ### bboxArea
 Calculate the area of a bounding box
@@ -216,6 +217,22 @@ reproject(bbox, forwardAsync, { async: true })
 
 // you can also control the point density of the intermediate polygon
 reproject(bbox, forward, { density: 99 })
+```
+
+### validate
+```js
+import validate from "bbox-fns/validate.js";
+
+validate([-180, 0, 180, 45])
+true
+
+// invalid length
+validate([-180, 0, 0, 180, 45, 0])
+false
+
+// xmin greater than xmax
+validate([-45, 10, -90, 20])
+false
 ```
 
 ### projection support

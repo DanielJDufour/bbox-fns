@@ -20,7 +20,8 @@ const {
   reproject,
   preciseReproject,
   scale,
-  preciseDivide
+  preciseDivide,
+  validate
 } = require("./index.js");
 
 const globe = [-180, -90, 180, 90];
@@ -546,4 +547,10 @@ test("preciseDivide", ({ eq }) => {
     "16.666...",
     "50"
   ]);
+});
+
+test("validate", ({ eq }) => {
+  eq(validate([-180, 0, 180, 45]), true);
+  eq(validate([-180, 0, 0, 180, 45, 0]), false);
+  eq(validate([-45, 10, -90, 20]), false);
 });

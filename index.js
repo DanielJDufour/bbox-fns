@@ -17,6 +17,7 @@ const preciseDivide = require("./precise/divide.js");
 const preciseReproject = require("./precise/reproject.js");
 const reproject = require("./reproject.js");
 const scale = require("./scale.js");
+const validate = require("./validate.js");
 
 const bboxfns = {
   bboxArea,
@@ -35,7 +36,8 @@ const bboxfns = {
   preciseDivide,
   preciseReproject,
   reproject,
-  scale
+  scale,
+  validate
 };
 
 if (typeof define === "function" && define.amd) {
