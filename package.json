@@ -45,6 +45,6 @@
   },
   "homepage": "https://github.com/DanielJDufour/bbox-fns#readme",
   "dependencies": {
-    "preciso": "^0.11.0"
+    "preciso": "^0.12.0"
   }
 }
