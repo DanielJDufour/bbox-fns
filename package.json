@@ -21,7 +21,8 @@
     "precise/bbox-array.js",
     "precise/dense-polygon.js",
     "precise/divide.js",
-    "precise/reproject.js"
+    "precise/reproject.js",
+    "validate.js"
   ],
   "scripts": {
     "f": "npm run format",
