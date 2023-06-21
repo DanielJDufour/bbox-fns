@@ -12,6 +12,7 @@
     "boolean-contains.js",
     "boolean-contains-point.js",
     "boolean-intersects.js",
+    "boolean-rectangle.js",
     "calc.js",
     "dense-polygon.js",
     "intersect.js",
@@ -23,6 +24,7 @@
     "precise/dense-polygon.js",
     "precise/divide.js",
     "precise/reproject.js",
+    "precise/validate.js",
     "validate.js"
   ],
   "scripts": {

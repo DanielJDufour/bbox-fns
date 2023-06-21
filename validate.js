@@ -6,6 +6,8 @@
  * @return {Boolean} valid - true or false
  */
 function validate(bbox) {
+  if (!Array.isArray(bbox)) return false;
+
   if (bbox.length !== 4) return false;
 
   if (bbox.some(n => typeof n !== "number")) return false;

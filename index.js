@@ -7,6 +7,7 @@ const bboxSize = require("./bbox-size.js");
 const booleanContains = require("./boolean-contains.js");
 const booleanContainsPoint = require("./boolean-contains-point.js");
 const booleanIntersects = require("./boolean-intersects.js");
+const booleanRectangle = require("./boolean-rectangle.js");
 const calc = require("./calc.js");
 const densePolygon = require("./dense-polygon.js");
 const intersect = require("./intersect.js");
@@ -18,6 +19,7 @@ const preciseReproject = require("./precise/reproject.js");
 const reproject = require("./reproject.js");
 const scale = require("./scale.js");
 const validate = require("./validate.js");
+const preciseValidate = require("./precise/validate.js");
 
 const bboxfns = {
   bboxArea,
@@ -27,6 +29,7 @@ const bboxfns = {
   booleanContains,
   booleanContainsPoint,
   booleanIntersects,
+  booleanRectangle,
   calc,
   densePolygon,
   intersect,
@@ -37,7 +40,8 @@ const bboxfns = {
   preciseReproject,
   reproject,
   scale,
-  validate
+  validate,
+  preciseValidate
 };
 
 if (typeof define === "function" && define.amd) {

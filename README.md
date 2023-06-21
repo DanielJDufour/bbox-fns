@@ -14,6 +14,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [booleanContains](#booleanContains)
 - [booleanContainsPoint](#booleanContainsPoint)
 - [booleanIntersects](#booleanIntersects)
+- [booleanRectangle](#booleanRectangle)
 - [calc](#calc)
 - [densePolygon](#densePolygon)
 - [intersect](#intersect)
@@ -110,6 +111,38 @@ const western_hemisphere = [-180, -90, 0, 90];
 const eastern_hemisphere = [0, -90, 180, 90];
 
 booleanIntersects(western_hemisphere, eastern_hemisphere);
+true
+```
+
+### booleanRectangle
+Checks if coordinates represent a rectangular bounding box
+```js
+import booleanRectangle from "bbox-fns/boolean-rectangle.js";
+
+// rectangle for the globe bbox [-180, -90, 180, 90]
+const coords = [
+  [ -180, 90 ],
+  [ -180, -90 ],
+  [ 0, -90 ],
+  [ 0, 90 ],
+  [ -180, 90 ]
+];
+booleanRectangle(coords);
+true
+
+// extra points that don't affect shape
+const denseCoords = [
+  [ -180, 90 ],
+  [ -180, 0 ],
+  [ -180, -90 ],
+  [ -90, -90 ],
+  [ 0, -90 ],
+  [ 0, 0 ],
+  [ 0, 90 ],
+  [ -90, 90 ],
+  [ -180, 90 ]
+];
+booleanRectangle(denseCoords);
 true
 ```
 

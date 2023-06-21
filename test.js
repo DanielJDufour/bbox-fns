@@ -11,6 +11,7 @@ const {
   booleanContains,
   booleanContainsPoint,
   booleanIntersects,
+  booleanRectangle,
   calc,
   densePolygon,
   intersect,
@@ -21,7 +22,8 @@ const {
   preciseReproject,
   scale,
   preciseDivide,
-  validate
+  validate,
+  preciseValidate
 } = require("./index.js");
 
 const globe = [-180, -90, 180, 90];
@@ -92,6 +94,41 @@ test("booleanContainsPoint", ({ eq }) => {
 
 test("booleanIntersects", ({ eq }) => {
   eq(booleanIntersects(western_hemisphere, eastern_hemisphere), true); // overlap on prime meridian
+});
+
+test("booleanRectangle", ({ eq }) => {
+  const bbox = [-180, -90, 0, 90];
+
+  // example
+  eq(booleanRectangle(densePolygon(bbox, { density: 1 })), true);
+
+  eq(booleanRectangle(bbox), false); // invalid input
+
+  const poly = polygon(bbox);
+  const densePoly = densePolygon(bbox, { density: 10 });
+  eq(booleanRectangle(poly), true);
+  eq(booleanRectangle(poly[0]), true);
+  eq(booleanRectangle([poly]), true);
+  eq(booleanRectangle(densePoly), true);
+  eq(booleanRectangle(densePoly[0]), true);
+  eq(booleanRectangle([densePoly]), true);
+
+  const triangle = [
+    [8.9257, 25.4035],
+    [25.625, 12.6403],
+    [32.1289, 23.8054],
+    [8.9257, 25.4035]
+  ];
+  eq(booleanRectangle(triangle), false);
+
+  const quadrilateral = [
+    [-9, 22],
+    [-9, -22],
+    [58, -30],
+    [58, 22],
+    [-9, 22]
+  ];
+  eq(booleanRectangle(quadrilateral, { debug: false }), false);
 });
 
 test("calc: GeoJSON Point", ({ eq }) => {
@@ -553,4 +590,10 @@ test("validate", ({ eq }) => {
   eq(validate([-180, 0, 180, 45]), true);
   eq(validate([-180, 0, 0, 180, 45, 0]), false);
   eq(validate([-45, 10, -90, 20]), false);
+});
+
+test("preciseValidate", ({ eq }) => {
+  eq(preciseValidate(["-180", "0", "180", "45"]), true);
+  eq(preciseValidate(["-180", "0", "0", "180", "45", "0"]), false);
+  eq(preciseValidate(["-45", "10", "-90", "20"]), false);
 });
