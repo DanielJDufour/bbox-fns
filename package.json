@@ -14,7 +14,10 @@
     "boolean-intersects.js",
     "boolean-rectangle.js",
     "calc.js",
+    "calc-all.js",
+    "dedupe.js",
     "dense-polygon.js",
+    "grid.js",
     "intersect.js",
     "merge.js",
     "polygon.js",
@@ -25,6 +28,7 @@
     "precise/divide.js",
     "precise/reproject.js",
     "precise/validate.js",
+    "union.js",
     "validate.js"
   ],
   "scripts": {

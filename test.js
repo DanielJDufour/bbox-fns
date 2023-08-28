@@ -3,6 +3,27 @@
 const test = require("flug");
 const subtract = require("preciso/subtract.js");
 
+const polygons_split_across_antimeridian = [
+  [
+    [
+      [-180, -18],
+      [-178, -18],
+      [-178, -20],
+      [-180, -20],
+      [-180, -18]
+    ]
+  ],
+  [
+    [
+      [180, -20],
+      [178, -20],
+      [178, -18],
+      [180, -18],
+      [180, -20]
+    ]
+  ]
+];
+
 const {
   bboxArea,
   bboxArray,
@@ -13,7 +34,9 @@ const {
   booleanIntersects,
   booleanRectangle,
   calc,
+  calcAll,
   densePolygon,
+  grid,
   intersect,
   merge,
   polygon,
@@ -23,7 +46,8 @@ const {
   scale,
   preciseDivide,
   validate,
-  preciseValidate
+  preciseValidate,
+  union
 } = require("./index.js");
 
 const globe = [-180, -90, 180, 90];
@@ -461,6 +485,22 @@ test("calc: ArcGIS Envelope in 2D", ({ eq }) => {
   );
 });
 
+test("polygons split across antimeridian", ({ eq }) => {
+  eq(calc(polygons_split_across_antimeridian), [-180, -20, 180, -18]);
+  eq(calcAll(polygons_split_across_antimeridian), [
+    [[-180, -20, -178, -18]],
+    [[178, -20, 180, -18]]
+  ]);
+  eq(
+    calcAll(
+      polygons_split_across_antimeridian.concat(
+        polygons_split_across_antimeridian
+      )
+    ),
+    [[[-180, -20, -178, -18]], [[178, -20, 180, -18]]]
+  );
+});
+
 test("densePolygon", ({ eq }) => {
   eq(densePolygon(globe, { density: 1 }), [
     [
@@ -530,6 +570,16 @@ test("intersect", ({ eq }) => {
   eq(intersect([-180, 1, -1, 90], [1, 1, 180, 90]), null);
 });
 
+test("grid", ({ eq }) => {
+  eq(grid(globe, [2, 1]), [western_hemisphere, eastern_hemisphere]);
+  eq(grid(globe, [2, 2]), [
+    [-180, -90, 0, 0],
+    [0, -90, 180, 0],
+    [-180, 0, 0, 90],
+    [0, 0, 180, 90]
+  ]);
+});
+
 test("merge", ({ eq }) => {
   const bboxes = [western_hemisphere, eastern_hemisphere];
   eq(merge(bboxes), [-180, -90, 180, 90]);
@@ -596,4 +646,16 @@ test("preciseValidate", ({ eq }) => {
   eq(preciseValidate(["-180", "0", "180", "45"]), true);
   eq(preciseValidate(["-180", "0", "0", "180", "45", "0"]), false);
   eq(preciseValidate(["-45", "10", "-90", "20"]), false);
+});
+
+test("union", ({ eq }) => {
+  const wyoming = [-110.99, 40.97, -104.08, 45.03];
+  const usa = [-125.1, 24.75, -66, 49.54];
+  const iceland = [-24.4, 63.29, -13.16, 66.73];
+
+  eq(union([]), []);
+  eq(union([iceland]), [iceland]);
+  eq(union([wyoming, usa]), [usa]);
+  eq(union([wyoming, usa, iceland]), [iceland, usa]);
+  eq(union([wyoming, iceland]), [iceland, wyoming]);
 });

@@ -16,9 +16,12 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [booleanIntersects](#booleanIntersects)
 - [booleanRectangle](#booleanRectangle)
 - [calc](#calc)
+- [calcAll](#calcAll)
 - [densePolygon](#densePolygon)
+- [grid](#grid)
 - [intersect](#intersect)
 - [merge](#merge)
+- [union](#union)
 - [polygon](#polygon)
 - [scale](#scale)
 - [reproject](#reproject)
@@ -206,6 +209,19 @@ calc({
 [10, 10, 40, 40]
 ```
 
+### calcAll
+Calculate an array of bounding boxes for all the input geometries.
+For example, a multipolygon will return multiple bounding boxes.
+```js
+import calcAll from "bbox-fns/calc-all.js";
+
+calcAll({
+  type: "MultiPolygon",
+  coordinates: [ ... ]
+});
+[bbox1, bbox2, ...]
+```
+
 ### densePolygon
 A more advanced version of polygon.  Create a polygon
 while adding points to each side of the rectangle.
@@ -218,6 +234,23 @@ densePolygon(bbox, { density: 100 });
 // add 100 points along the top and bottom edge (x-axis)
 // and 400 points along the left and right edge (y-axis)
 densePolygon(bbox, { density: [100, 400] });
+```
+
+### grid
+Chop bounding box up into multiple smaller bounding boxes.
+```js
+import grid from "bbox-fns/grid.js";
+
+const globe = [-180, -90, 180, 90];
+const number_of_columns = 2; // how many grid cells left to right
+const number_of_rows = 2; // how many grid cells top to bottom
+const quadrants = grid(globe, [number_of_columns, number_of_rows]);
+[
+  [-180, -90, 0, 0], // south-western
+  [0, -90, 180, 0], // south-eastern
+  [-180, 0, 0, 90], // north-western
+  [0, 0, 180, 90]  // north-eastern
+]
 ```
 
 ### scale
@@ -250,6 +283,22 @@ reproject(bbox, forwardAsync, { async: true })
 
 // you can also control the point density of the intermediate polygon
 reproject(bbox, forward, { density: 99 })
+```
+
+### union
+Combine all bounding boxes that intersect.
+This is different from merge, which will combine bounding boxes even if they don't intersect.
+```js
+import union from "bbox-fns/union.js";
+
+const wyoming = [-110.99, 40.97, -104.08, 45.03];
+const usa = [-125.10, 24.75, -66, 49.54];
+const iceland = [-24.40,  63.29, -13.16, 66.73];
+
+union([wyoming, usa, iceland]);
+
+// only includes usa and iceland, because wyoming merged into usa
+[[-125.10, 24.75, -66, 49.54], [-24.40,  63.29, -13.16, 66.73]]
 ```
 
 ### validate
