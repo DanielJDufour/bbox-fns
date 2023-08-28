@@ -21,10 +21,10 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [grid](#grid)
 - [intersect](#intersect)
 - [merge](#merge)
-- [union](#union)
 - [polygon](#polygon)
-- [scale](#scale)
 - [reproject](#reproject)
+- [scale](#scale)
+- [union](#union)
 - [validate](#validate)
 
 ### bboxArea
