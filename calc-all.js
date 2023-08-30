@@ -2,6 +2,17 @@
 
 const dedupe = require("./dedupe.js");
 
+function flatten(arr) {
+  const out = [];
+  for (let a = 0; a < arr.length; a++) {
+    const it = arr[a];
+    for (let i = 0; i < it.length; i++) {
+      out.push(it[i]);
+    }
+  }
+  return out;
+}
+
 function calcAll(geom) {
   if (geom.geometry) geom = geom.geometry;
   if (geom.coordinates) geom = geom.coordinates;
@@ -12,12 +23,12 @@ function calcAll(geom) {
 
   // GeoJSON FeatureCollection
   if (Array.isArray(geom.features)) {
-    return dedupe(geom.features.map(calcAll));
+    return dedupe(flatten(geom.features.map(calcAll)));
   }
 
   // GeoJSON GeometryCollection
   if (Array.isArray(geom.geometries)) {
-    return dedupe(geom.geometries.map(calcAll));
+    return dedupe(flatten(geom.geometries.map(calcAll)));
   }
 
   if (
@@ -25,7 +36,7 @@ function calcAll(geom) {
     Array.isArray(geom[0]) &&
     Array.isArray(geom[0][0])
   ) {
-    return dedupe(geom.map(calcAll));
+    return dedupe(flatten(geom.map(calcAll)));
   }
 
   // array of [x, y] coordinate pairs
@@ -45,7 +56,7 @@ function calcAll(geom) {
       if (py < ymin) ymin = py;
       if (py > ymax) ymax = py;
     });
-    return [xmin, ymin, xmax, ymax];
+    return [[xmin, ymin, xmax, ymax]];
   }
 
   // point
@@ -55,19 +66,19 @@ function calcAll(geom) {
     typeof geom[0] === "number"
   ) {
     const [x, y] = geom;
-    return [x, y, x, y];
+    return [[x, y, x, y]];
   }
 
   // ArcGIS Point
   if (typeof geom.x === "number" && typeof geom.y === "number") {
     const { x, y } = geom;
-    return [x, y, x, y];
+    return [[x, y, x, y]];
   }
 
   if (
     ["xmin", "xmax", "ymin", "ymax"].every(k => typeof geom[k] === "number")
   ) {
-    return [geom.xmin, geom.ymin, geom.xmax, geom.ymax];
+    return [[geom.xmin, geom.ymin, geom.xmax, geom.ymax]];
   }
 }
 

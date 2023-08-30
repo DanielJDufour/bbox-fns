@@ -488,8 +488,8 @@ test("calc: ArcGIS Envelope in 2D", ({ eq }) => {
 test("polygons split across antimeridian", ({ eq }) => {
   eq(calc(polygons_split_across_antimeridian), [-180, -20, 180, -18]);
   eq(calcAll(polygons_split_across_antimeridian), [
-    [[-180, -20, -178, -18]],
-    [[178, -20, 180, -18]]
+    [-180, -20, -178, -18],
+    [178, -20, 180, -18]
   ]);
   eq(
     calcAll(
@@ -497,7 +497,10 @@ test("polygons split across antimeridian", ({ eq }) => {
         polygons_split_across_antimeridian
       )
     ),
-    [[[-180, -20, -178, -18]], [[178, -20, 180, -18]]]
+    [
+      [-180, -20, -178, -18],
+      [178, -20, 180, -18]
+    ]
   );
 });
 
