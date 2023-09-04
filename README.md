@@ -11,6 +11,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [bboxArea](#bboxArea)
 - [bboxArray](#bboxArray)
 - [bboxPoint](#bboxPoint)
+- [bboxSize](#bboxSize)
 - [booleanContains](#booleanContains)
 - [booleanContainsPoint](#booleanContainsPoint)
 - [booleanIntersects](#booleanIntersects)
