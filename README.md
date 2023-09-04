@@ -24,6 +24,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [polygon](#polygon)
 - [reproject](#reproject)
 - [scale](#scale)
+- [split](#split)
 - [union](#union)
 - [validate](#validate)
 
@@ -266,6 +267,28 @@ scale([0, 9, 50, 200], 0.5);
 // same as [0 * 2, 9 * 10, 50 * 2, 200 * 10]
 scale([0, 9, 50, 200], [2, 10]);
 [0, 90, 100, 2000]
+```
+
+### split
+Split bounding box that crosses given x or y boundaries.  For example, split a bbox that crosses the antimeridian into two bounding boxes.
+```js
+import split from "bbox-fns/split.js";
+
+// split across the antimeridian
+split([-200, -90, 160, 90], { x: [-180, 180] })
+[
+  [-200, -90, -180, 90], // overflow, left of antimeridian
+  [-180, -90, 160, 90] // right of antimeridian
+]
+
+// split across the antimeridian and the poles
+split([-200, -90, 160, 100], { x: [-180, 180], y: [-90, 90] })
+[
+  [-200,-90,-180,90],
+  [-200,90,-180,100],
+  [-180,-90,160,90],
+  [-180,90,160,100]
+]
 ```
 
 ### reproject

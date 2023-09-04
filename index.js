@@ -20,6 +20,7 @@ const preciseDivide = require("./precise/divide.js");
 const preciseReproject = require("./precise/reproject.js");
 const reproject = require("./reproject.js");
 const scale = require("./scale.js");
+const split = require("./split.js");
 const validate = require("./validate.js");
 const preciseValidate = require("./precise/validate.js");
 const union = require("./union.js");
@@ -45,6 +46,7 @@ const bboxfns = {
   preciseReproject,
   reproject,
   scale,
+  split,
   validate,
   preciseValidate,
   union
