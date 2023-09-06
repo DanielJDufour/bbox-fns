@@ -28,6 +28,7 @@
     "precise/divide.js",
     "precise/reproject.js",
     "precise/validate.js",
+    "shift.js",
     "split.js",
     "union.js",
     "validate.js"

@@ -25,6 +25,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [polygon](#polygon)
 - [reproject](#reproject)
 - [scale](#scale)
+- [shift](#shift)
 - [split](#split)
 - [union](#union)
 - [validate](#validate)
@@ -268,6 +269,22 @@ scale([0, 9, 50, 200], 0.5);
 // same as [0 * 2, 9 * 10, 50 * 2, 200 * 10]
 scale([0, 9, 50, 200], [2, 10]);
 [0, 90, 100, 2000]
+```
+
+### shift
+Shift bounding box horizontally and/or vertically
+```js
+// shift bounding box overlapping left "edge"
+// to the right, so it overlaps the right "edge"
+shift([-200, 40, -160, 90], { x: 360 })
+[160,40,200,90];
+
+// shift horizontally and vertically
+shift([-185, 90, -180, 95], [360, -90])
+[175, 0, 180, 5]
+
+// same as above
+shift([-185, 90, -180, 95], { x: 360, y: -90 });
 ```
 
 ### split
