@@ -344,7 +344,7 @@ union([wyoming, usa, iceland]);
 ```
 
 ### unwrap
-Un-wrap an extent that overflows the edge of the earth.
+Un-wrap an extent that overflows the edge of the earth, returning an array of one or more bounding boxes.
 ```js
 import unwrap from "bbox-fns/unwrap.js";
 
