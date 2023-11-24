@@ -28,6 +28,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [shift](#shift)
 - [split](#split)
 - [union](#union)
+- [unwrap](#unwrap)
 - [validate](#validate)
 
 ### bboxArea
@@ -340,6 +341,23 @@ union([wyoming, usa, iceland]);
 
 // only includes usa and iceland, because wyoming merged into usa
 [[-125.10, 24.75, -66, 49.54], [-24.40,  63.29, -13.16, 66.73]]
+```
+
+### unwrap
+Un-wrap an extent that overflows the edge of the earth.
+```js
+import unwrap from "bbox-fns/unwrap.js";
+
+const earth = [-180, -90, 180, 90];
+const bbox = [-200, -21, -160, 87]; // extends over "left edge" of the earth
+
+unwrap(bbox, earth);
+
+// bounding box unwrapped and normalized within the bounds of the earth
+[
+  [-180, -21, -160, 87],
+  [160, -21, 180, 87]
+]
 ```
 
 ### validate

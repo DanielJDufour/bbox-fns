@@ -12,6 +12,7 @@
  */
 function split(bbox, breakpoints) {
   const [xmin, ymin, xmax, ymax] = bbox;
+  if (!breakpoints) throw new Error("[bbox-fns/split.js] missing breakpoints");
   const xbrks = breakpoints.x || [];
   const ybrks = breakpoints.y || [];
 

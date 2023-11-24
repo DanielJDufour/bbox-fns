@@ -25,6 +25,7 @@ const split = require("./split.js");
 const validate = require("./validate.js");
 const preciseValidate = require("./precise/validate.js");
 const union = require("./union.js");
+const unwrap = require("./unwrap.js");
 
 const bboxfns = {
   bboxArea,
@@ -51,7 +52,8 @@ const bboxfns = {
   split,
   validate,
   preciseValidate,
-  union
+  union,
+  unwrap
 };
 
 if (typeof define === "function" && define.amd) {

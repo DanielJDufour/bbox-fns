@@ -49,7 +49,8 @@ const {
   preciseDivide,
   validate,
   preciseValidate,
-  union
+  union,
+  unwrap
 } = require("./index.js");
 
 const globe = [-180, -90, 180, 90];
@@ -720,4 +721,25 @@ test("union", ({ eq }) => {
   eq(union([wyoming, usa]), [usa]);
   eq(union([wyoming, usa, iceland]), [iceland, usa]);
   eq(union([wyoming, iceland]), [iceland, wyoming]);
+});
+
+test("unwrap EPSG:4326", ({ eq }) => {
+  const earth = [-180, -90, 180, 90];
+  eq(unwrap([-180, -90, 180, 90], earth), [[-180, -90, 180, 90]]);
+  eq(unwrap([-200, -90, -160, 90], earth), [
+    [-180, -90, -160, 90],
+    [160, -90, 180, 90]
+  ]);
+  eq(unwrap([-200, -90, -180, 90], earth), [[160, -90, 180, 90]]);
+  eq(unwrap([-200, -90, -185, 90], earth), [[160, -90, 175, 90]]);
+  eq(unwrap([180, -90, 200, 90], earth), [[-180, -90, -160, 90]]);
+  eq(unwrap([170, -90, 210, 90], earth), [
+    [-180, -90, -150, 90],
+    [170, -90, 180, 90]
+  ]);
+  eq(unwrap([170, -90, 180, 90], earth), [[170, -90, 180, 90]]);
+  eq(unwrap([-200, -21, -160, 87], earth), [
+    [-180, -21, -160, 87],
+    [160, -21, 180, 87]
+  ]);
 });
