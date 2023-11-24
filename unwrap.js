@@ -1,6 +1,7 @@
 "use_strict";
 
 const shift = require("./shift.js");
+const sort = require("./sort.js");
 const split = require("./split.js");
 const union = require("./union.js");
 
@@ -38,6 +39,8 @@ function unwrap(bbox, container) {
 
   // combine bboxes if they overlap
   bboxes = union(bboxes);
+
+  bboxes = sort(bboxes);
 
   return bboxes;
 }

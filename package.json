@@ -29,6 +29,7 @@
     "precise/reproject.js",
     "precise/validate.js",
     "shift.js",
+    "sort.js",
     "split.js",
     "union.js",
     "unwrap.js",

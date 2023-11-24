@@ -45,6 +45,7 @@ const {
   preciseReproject,
   scale,
   shift,
+  sort,
   split,
   preciseDivide,
   validate,
@@ -709,6 +710,17 @@ test("preciseValidate", ({ eq }) => {
   eq(preciseValidate(["-180", "0", "180", "45"]), true);
   eq(preciseValidate(["-180", "0", "0", "180", "45", "0"]), false);
   eq(preciseValidate(["-45", "10", "-90", "20"]), false);
+});
+
+test("sort", ({ eq }) => {
+  const bboxes = [
+    [175, -85, 180, 90],
+    [-180, -85, -175, 90]
+  ];
+  eq(sort(bboxes), [
+    [-180, -85, -175, 90],
+    [175, -85, 180, 90]
+  ]);
 });
 
 test("union", ({ eq }) => {

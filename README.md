@@ -26,6 +26,7 @@ Bounding boxes, or rectangular extents, are represented as an array of 4 numbers
 - [reproject](#reproject)
 - [scale](#scale)
 - [shift](#shift)
+- [sort](#sort)
 - [split](#split)
 - [union](#union)
 - [unwrap](#unwrap)
@@ -325,6 +326,18 @@ reproject(bbox, forwardAsync, { async: true })
 
 // you can also control the point density of the intermediate polygon
 reproject(bbox, forward, { density: 99 })
+```
+
+### sort
+```js
+import sort from "bbox-fns/sort.js";
+
+const bboxes = [
+  [175, -85, 180, 90],
+  [-180, -85, -175, 90]
+];
+sort(bboxes)
+[[-180,-85,-175,90],[175,-85,180,90]]
 ```
 
 ### union
