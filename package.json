@@ -37,7 +37,7 @@
   ],
   "scripts": {
     "f": "npm run format",
-    "format": "npx prettier --arrow-parens=avoid --trailing-comma=none --write *.js */*.js",
+    "format": "npx prettier --arrow-parens=avoid --print-width=200 --trailing-comma=none --write *.js */*.js",
     "test": "node test.js"
   },
   "repository": {
@@ -56,6 +56,6 @@
   },
   "homepage": "https://github.com/DanielJDufour/bbox-fns#readme",
   "dependencies": {
-    "preciso": "^0.12.0"
+    "preciso": "^0.12.2"
   }
 }

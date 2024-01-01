@@ -8,12 +8,7 @@ function intersect(a, b) {
 
   if (!booleanIntersects(a, b)) return null;
 
-  return [
-    Math.max(axmin, bxmin),
-    Math.max(aymin, bymin),
-    Math.min(axmax, bxmax),
-    Math.min(aymax, bymax)
-  ];
+  return [Math.max(axmin, bxmin), Math.max(aymin, bymin), Math.min(axmax, bxmax), Math.min(aymax, bymax)];
 }
 
 module.exports = intersect;

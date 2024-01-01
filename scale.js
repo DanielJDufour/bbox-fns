@@ -7,12 +7,7 @@
  * @return {bbox} bbox
  */
 function scale([xmin, ymin, xmax, ymax], scl) {
-  const [sx, sy] =
-    typeof scl === "number"
-      ? [scl, scl]
-      : scl.length === 1
-      ? [scl[0], scl[0]]
-      : scl;
+  const [sx, sy] = typeof scl === "number" ? [scl, scl] : scl.length === 1 ? [scl[0], scl[0]] : scl;
   return [xmin * sx, ymin * sy, xmax * sx, ymax * sy];
 }
 

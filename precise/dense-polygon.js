@@ -17,8 +17,7 @@ function preciseDensePolygon(bbox, { density = 0 } = { density: 0 }) {
 
   let [xmin, ymin, xmax, ymax] = bbox;
 
-  if (typeof density === "number" || typeof density === "string")
-    density = [density, density];
+  if (typeof density === "number" || typeof density === "string") density = [density, density];
 
   density = density.map(n => n.toString());
 

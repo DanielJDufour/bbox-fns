@@ -65,10 +65,7 @@ test("bboxPoint", ({ eq }) => {
 
 test("bboxArea", ({ eq }) => {
   eq(bboxArea([2, 3, 8, 9]), 36);
-  eq(
-    bboxArea([-180, 84.48577680525165, -179, 86.06126914660831]),
-    1.5754923413566644
-  );
+  eq(bboxArea([-180, 84.48577680525165, -179, 86.06126914660831]), 1.5754923413566644);
   eq(bboxArea([-540, -90, -180, 90]), 64800);
 });
 
@@ -83,10 +80,7 @@ test("bboxArray", ({ eq }) => {
 });
 
 test("bboxSize", ({ eq }) => {
-  eq(bboxSize([-180, 84.48577680525165, -179, 86.06126914660831]), [
-    1,
-    1.5754923413566644
-  ]);
+  eq(bboxSize([-180, 84.48577680525165, -179, 86.06126914660831]), [1, 1.5754923413566644]);
   eq(bboxSize([-540, -90, -180, 90]), [360, 180]);
 });
 
@@ -101,10 +95,7 @@ test("booleanContains", ({ eq }) => {
   eq(booleanContains(eastern_hemisphere, colorado), false);
   eq(booleanContains(eastern_hemisphere, western_hemisphere), false);
   eq(booleanContains(western_hemisphere, bbox_to_edge), true);
-  eq(
-    booleanContains(western_hemisphere, bbox_to_edge, { exclusive: true }),
-    false
-  );
+  eq(booleanContains(western_hemisphere, bbox_to_edge, { exclusive: true }), false);
   eq(booleanContains(western_hemisphere, northern_hemisphere), false);
 });
 
@@ -114,10 +105,7 @@ test("booleanContainsPoint", ({ eq }) => {
   const null_island = [0, 0];
   eq(booleanContainsPoint(western_hemisphere, hawaii), true);
   eq(booleanContainsPoint(western_hemisphere, null_island), true);
-  eq(
-    booleanContainsPoint(western_hemisphere, null_island, { exclusive: true }),
-    false
-  );
+  eq(booleanContainsPoint(western_hemisphere, null_island, { exclusive: true }), false);
 });
 
 test("booleanIntersects", ({ eq }) => {
@@ -495,17 +483,10 @@ test("polygons split across antimeridian", ({ eq }) => {
     [-180, -20, -178, -18],
     [178, -20, 180, -18]
   ]);
-  eq(
-    calcAll(
-      polygons_split_across_antimeridian.concat(
-        polygons_split_across_antimeridian
-      )
-    ),
-    [
-      [-180, -20, -178, -18],
-      [178, -20, 180, -18]
-    ]
-  );
+  eq(calcAll(polygons_split_across_antimeridian.concat(polygons_split_across_antimeridian)), [
+    [-180, -20, -178, -18],
+    [178, -20, 180, -18]
+  ]);
 });
 
 test("densePolygon", ({ eq }) => {
@@ -643,9 +624,7 @@ test("shift", async ({ eq }) => {
 });
 
 test("split", async ({ eq }) => {
-  eq(split([-180, -90, 180, 90], { x: [-180, 180], y: [-90, 90] }), [
-    [-180, -90, 180, 90]
-  ]);
+  eq(split([-180, -90, 180, 90], { x: [-180, 180], y: [-90, 90] }), [[-180, -90, 180, 90]]);
   eq(split([-200, -90, 160, 90], { x: [-180, 180] }), [
     [-200, -90, -180, 90],
     [-180, -90, 160, 90]
@@ -692,12 +671,7 @@ test("split", async ({ eq }) => {
 test("preciseDivide", ({ eq }) => {
   eq(preciseDivide([0, 9, 50, 200], 2), ["0", "4.5", "25", "100"]);
   eq(preciseDivide([0, 9, 50, 200], [2]), ["0", "4.5", "25", "100"]);
-  eq(preciseDivide([0, 9, 50, 200], [3, 4], { ellipsis: true }), [
-    "0",
-    "2.25",
-    "16.666...",
-    "50"
-  ]);
+  eq(preciseDivide([0, 9, 50, 200], [3, 4], { ellipsis: true }), ["0", "2.25", "16.666...", "50"]);
 });
 
 test("validate", ({ eq }) => {

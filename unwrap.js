@@ -12,18 +12,8 @@ function unwrap(bbox, container) {
   const global_height = global_ymax - global_ymin;
 
   const breakpoints = {
-    x: [
-      global_xmin - global_width,
-      global_xmin,
-      global_xmax,
-      global_xmax + global_width
-    ],
-    y: [
-      global_ymin - global_height,
-      global_ymin,
-      global_ymax,
-      global_ymax + global_height
-    ]
+    x: [global_xmin - global_width, global_xmin, global_xmax, global_xmax + global_width],
+    y: [global_ymin - global_height, global_ymin, global_ymax, global_ymax + global_height]
   };
 
   let bboxes = split(bbox, breakpoints);

@@ -1,9 +1,6 @@
 "use_strict";
 
-function densePolygon(
-  [xmin, ymin, xmax, ymax],
-  { density = 0 } = { density: 0 }
-) {
+function densePolygon([xmin, ymin, xmax, ymax], { density = 0 } = { density: 0 }) {
   if (typeof density === "number") density = [density, density];
 
   const [x_density, y_density] = density;

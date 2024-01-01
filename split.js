@@ -16,12 +16,8 @@ function split(bbox, breakpoints) {
   const xbrks = breakpoints.x || [];
   const ybrks = breakpoints.y || [];
 
-  const xedges = [xmin]
-    .concat(xbrks.filter(x => x > xmin && x < xmax))
-    .concat([xmax]);
-  const yedges = [ymin]
-    .concat(ybrks.filter(y => y > ymin && y < ymax))
-    .concat([ymax]);
+  const xedges = [xmin].concat(xbrks.filter(x => x > xmin && x < xmax)).concat([xmax]);
+  const yedges = [ymin].concat(ybrks.filter(y => y > ymin && y < ymax)).concat([ymax]);
 
   const bboxes = [];
 

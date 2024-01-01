@@ -53,6 +53,13 @@ bboxArray([
   [ -179, 84.48577680525165 ]
 ]);
 [-180, 84.48577680525165, -179, 86.06126914660831]
+
+// throws because of the NaN value
+bboxArray([ -180, 86.06 ], [NaN, NaN], [ -179, 84.48 ]);
+
+// skip NaN values (don't throw)
+bboxArray(points, { nan_strategy: "skip" })
+[-180, 84.48, -179, 86.06]
 ```
 
 ### bboxPoint
@@ -326,6 +333,9 @@ reproject(bbox, forwardAsync, { async: true })
 
 // you can also control the point density of the intermediate polygon
 reproject(bbox, forward, { density: 99 })
+
+// skip (don't throw error) when forward returns a NaN value
+reproject(bbox, forward, { density: 99, nan_stategy: "skip" })
 ```
 
 ### sort

@@ -24,8 +24,7 @@ function grid([xmin, ymin, xmax, ymax], div) {
     const cell_ymax = r === rows.length - 1 ? ymax : cell_ymin + cell_height;
     for (let c = 0; c < columns; c++) {
       const cell_xmin = xmin + c * cell_width;
-      const cell_xmax =
-        c === columns.length - 1 ? xmax : cell_xmin + cell_width;
+      const cell_xmax = c === columns.length - 1 ? xmax : cell_xmin + cell_width;
       cells.push([cell_xmin, cell_ymin, cell_xmax, cell_ymax]);
     }
   }

@@ -26,21 +26,14 @@ function booleanRectangle(coords, { debug = 0 } = { debug: 0 }) {
   // if multi-polygon, may need to unwrap twice
   if (coords.length === 1) coords = coords[0];
 
-  if (
-    !coords.every(
-      pt => Array.isArray(pt) && pt.every(n => typeof n === "number")
-    )
-  ) {
+  if (!coords.every(pt => Array.isArray(pt) && pt.every(n => typeof n === "number"))) {
     if (debug) console.log("[bbox-fns/booleanRectangle] invalid points");
     return false;
   }
 
   // first and last coordinate should be the same
   if (JSON.stringify(coords[0]) !== JSON.stringify(coords[coords.length - 1])) {
-    if (debug)
-      console.log(
-        "[bbox-fns/booleanRectangle] first and last coordinates not equal"
-      );
+    if (debug) console.log("[bbox-fns/booleanRectangle] first and last coordinates not equal");
     return false;
   }
 

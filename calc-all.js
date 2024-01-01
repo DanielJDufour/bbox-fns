@@ -31,20 +31,12 @@ function calcAll(geom) {
     return dedupe(flatten(geom.geometries.map(calcAll)));
   }
 
-  if (
-    Array.isArray(geom) &&
-    Array.isArray(geom[0]) &&
-    Array.isArray(geom[0][0])
-  ) {
+  if (Array.isArray(geom) && Array.isArray(geom[0]) && Array.isArray(geom[0][0])) {
     return dedupe(flatten(geom.map(calcAll)));
   }
 
   // array of [x, y] coordinate pairs
-  if (
-    Array.isArray(geom) &&
-    Array.isArray(geom[0]) &&
-    typeof geom[0][0] === "number"
-  ) {
+  if (Array.isArray(geom) && Array.isArray(geom[0]) && typeof geom[0][0] === "number") {
     const [x, y] = geom[0];
     let xmin = x;
     let ymin = y;
@@ -60,11 +52,7 @@ function calcAll(geom) {
   }
 
   // point
-  if (
-    Array.isArray(geom) &&
-    (geom.length === 2 || geom.length === 3) &&
-    typeof geom[0] === "number"
-  ) {
+  if (Array.isArray(geom) && (geom.length === 2 || geom.length === 3) && typeof geom[0] === "number") {
     const [x, y] = geom;
     return [[x, y, x, y]];
   }
@@ -75,9 +63,7 @@ function calcAll(geom) {
     return [[x, y, x, y]];
   }
 
-  if (
-    ["xmin", "xmax", "ymin", "ymax"].every(k => typeof geom[k] === "number")
-  ) {
+  if (["xmin", "xmax", "ymin", "ymax"].every(k => typeof geom[k] === "number")) {
     return [[geom.xmin, geom.ymin, geom.xmax, geom.ymax]];
   }
 }
