@@ -7,17 +7,20 @@
  */
 function bboxArray(points, { nan_strategy = "throw" } = { nan_strategy: "throw" }) {
   const count = points.length;
-  const [x, y] = points[0];
-  let xmin = x;
-  let xmax = x;
-  let ymin = y;
-  let ymax = y;
-  for (let i = 1; i < count; i++) {
+  let xmin = null;
+  let xmax = null;
+
+  let ymin = null;
+  let ymax = null;
+  for (let i = 0; i < count; i++) {
     const [x, y] = points[i];
     if (isNaN(x)) {
       if (nan_strategy === "throw") {
         throw new Error("[bbox-fns/bbox-array] encountered point with a NaN value: [" + x + ", " + y + "]");
       }
+    } else if (xmin === null) {
+      xmin = x;
+      xmax = x;
     } else {
       if (x < xmin) xmin = x;
       else if (x > xmax) xmax = x;
@@ -26,6 +29,9 @@ function bboxArray(points, { nan_strategy = "throw" } = { nan_strategy: "throw" 
       if (nan_strategy === "throw") {
         throw new Error("[bbox-fns/bbox-array] encountered point with a NaN value: [" + x + ", " + y + "]");
       }
+    } else if (ymin === null) {
+      ymin = y;
+      ymax = y;
     } else {
       if (y < ymin) ymin = y;
       else if (y > ymax) ymax = y;
