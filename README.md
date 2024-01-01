@@ -335,7 +335,7 @@ reproject(bbox, forwardAsync, { async: true })
 reproject(bbox, forward, { density: 99 })
 
 // skip (don't throw error) when forward returns a NaN value
-reproject(bbox, forward, { nan_stategy: "skip" })
+reproject(bbox, forward, { nan_strategy: "skip" })
 ```
 
 ### sort
