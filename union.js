@@ -5,6 +5,7 @@ const merge = require("./merge.js");
 
 /**
  * @name bboxes
+ * @description combine bboxes that intersect with each other
  * @param {Array} bboxes - an array of bounding boxes
  * @return {bbox} an array of bboxes in form [xmin, ymin, xmax, ymax]
  */

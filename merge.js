@@ -2,6 +2,7 @@
 
 /**
  * @name bboxes
+ * @description Get bounding box that covers all the bboxes passed in, even if they don't intersect.
  * @param {Array} bboxes - an array of bounding boxes
  * @return {bbox} a bbox in form [xmin, ymin, xmax, ymax] that covers the extent of all bboxes
  */

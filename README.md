@@ -172,6 +172,8 @@ intersect(western_hemisphere, eastern_hemisphere);
 ```
 
 ### merge
+Get bounding box that covers all the bboxes passed in,
+even if they don't intersect.
 ```js
 import merge from "bbox-fns/merge.js";
 
